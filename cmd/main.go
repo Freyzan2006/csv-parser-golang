@@ -1,31 +1,51 @@
-package main 
+// package main
+
+// import (
+// 	"fmt"
+// 	"log"
+
+// 	"csv-parser/internal/cli"
+// 	"csv-parser/internal/parser"
+// )
+
+// func main() {
+	// cfg := cli.NewConfig()
+	// flags := cfg.ParseFlags()
+
+	// if flags.FilePath == "" {
+	// 	log.Fatal("Укажите путь к CSV-файлу с помощью флага -file")
+	// }
+
+	// if flags.Required != "" {
+	// 	fmt.Printf("Обязательные поля: %s\n", flags.Required)
+	// }
+
+	// records, err := parser.ReadCSV(flags.FilePath)
+	// if err != nil {
+	// 	log.Fatalf("Ошибка: %v", err)
+	// }
+
+	// for i, r := range records {
+	// 	fmt.Printf("Запись %d:\n", i+1)
+	// 	for k, v := range r {
+	// 		fmt.Printf("  %s: %s\n", k, v)
+	// 	}
+	// }
+// }
+
+
+package main
 
 import (
-    "flag"
-    "fmt"
-    "log"
-
-    "csv-parser/internal/parser"
+	"csv-parser/internal/cli"
+	"csv-parser/internal/core"
+	"log"
 )
 
 func main() {
-    filePath := flag.String("file", "", "Путь к CSV-файлу")
-    flag.Parse()
+	cfg := cli.ParseFlags()
 
-    if *filePath == "" {
-        log.Fatal("Укажите путь к CSV-файлу с помощью флага -file")
-    }
-
-	records, err := parser.ReadCSV(*filePath)
-	if err != nil {
-		log.Fatalf("Ошибка: %v", err)
+	if err := core.Process(cfg); err != nil {
+		log.Fatal(err)
 	}
-	
-	for i, r := range records {
-		fmt.Printf("Запись %d:\n", i+1)
-		for k, v := range r {
-			fmt.Printf("  %s: %s\n", k, v)
-		}
-	}
-	
 }

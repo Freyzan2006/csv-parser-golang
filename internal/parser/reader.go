@@ -7,7 +7,11 @@ import (
     "os"
 )
 
-func ReadCSV(path string) ([]map[string]string, error) {
+import (
+    "csv-parser/internal/model"
+)
+
+func ReadCSV(path string) ([]model.Record, error) {
     file, err := os.Open(path)
     if err != nil {
         return nil, fmt.Errorf("не удалось открыть файл: %w", err)
@@ -25,10 +29,10 @@ func ReadCSV(path string) ([]map[string]string, error) {
     }
 
     headers := records[0]
-    var result []map[string]string
+    var result []model.Record
 
     for _, row := range records[1:] {
-        entry := make(map[string]string)
+        entry := make(model.Record)
         for i, cell := range row {
             if i < len(headers) {
                 entry[headers[i]] = cell
@@ -36,6 +40,7 @@ func ReadCSV(path string) ([]map[string]string, error) {
         }
         result = append(result, entry)
     }
+
 
     return result, nil
 }

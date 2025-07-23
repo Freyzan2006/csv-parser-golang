@@ -37,6 +37,14 @@ func Process(cfg *config.Config) error {
 		}
 	}
 
+	if len(cfg.Filter) > 0 {
+		records, err = validator.Filter(records, cfg.Filter, cfg.Verbose)
+		if err != nil {
+			return fmt.Errorf("фильтрация: %w", err)
+		}
+	}
+
+
 
 	printer.PrintRecords(records)
 	return nil

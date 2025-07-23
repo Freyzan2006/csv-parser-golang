@@ -14,6 +14,7 @@ func ParseFlags() *config.Config {
 		validateRaw  string
 		rangeRaw     string
 		verbose      bool
+		filterRow    string
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -21,6 +22,7 @@ func ParseFlags() *config.Config {
 	flag.StringVar(&validateRaw, "validate-type", "", "Проверка типов (пример: Age:int,Price:float)")
 	flag.StringVar(&rangeRaw, "range", "", "Диапазоны значений (пример: Age:18-65)")
 	flag.BoolVar(&verbose, "verbose", false, "Вывод подробной информации")
+	flag.StringVar(&filterRow, "filter", "", "Фильтрация по строке (пример: Age>100)")
 
 
 	flag.Parse()
@@ -31,5 +33,6 @@ func ParseFlags() *config.Config {
 		ValidateType: pkg.ParseKeyValueMap(validateRaw, ":"),
 		Range:        pkg.ParseRangeMap(rangeRaw),
 		Verbose:      verbose,
+		Filter:    	  filterRow,
 	}
 }

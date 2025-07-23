@@ -6,4 +6,5 @@ type Config struct {
 	ValidateType map[string]string
 	Range        map[string][2]float64
 	Verbose 	 bool
+	Filter		 string
 }

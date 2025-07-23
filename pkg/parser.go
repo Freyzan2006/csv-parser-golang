@@ -3,6 +3,8 @@ package pkg
 import (
 	"fmt"
 	"strings"
+	"strconv"
+	"regexp"
 )
 
 func ParseCommaList(s string) []string {
@@ -53,4 +55,34 @@ func ParseRangeMap(s string) map[string][2]float64 {
 		result[field] = [2]float64{min, max}
 	}
 	return result
+}
+
+
+
+
+
+type FilterCondition struct {
+	Field    string
+	Operator string
+	Value    float64
+}
+
+
+func ParseFilter(input string) (FilterCondition, error) {
+	re := regexp.MustCompile(`^(\w+)\s*(==|!=|>=|<=|>|<)\s*(\d+\.?\d*)$`)
+	matches := re.FindStringSubmatch(strings.TrimSpace(input))
+	if len(matches) != 4 {
+		return FilterCondition{}, fmt.Errorf("неверный формат фильтра: %s", input)
+	}
+
+	val, err := strconv.ParseFloat(matches[3], 64)
+	if err != nil {
+		return FilterCondition{}, fmt.Errorf("не удалось преобразовать значение: %w", err)
+	}
+
+	return FilterCondition{
+		Field:    matches[1],
+		Operator: matches[2],
+		Value:    val,
+	}, nil
 }

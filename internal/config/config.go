@@ -7,4 +7,5 @@ type Config struct {
 	Range        map[string][2]float64
 	Verbose 	 bool
 	Filter		 string
+	Sort		 string
 }

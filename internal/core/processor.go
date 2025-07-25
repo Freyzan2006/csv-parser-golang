@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"csv-parser/internal/config"
 	"csv-parser/internal/parser"
-	"csv-parser/internal/validator"
 	"csv-parser/internal/printer"
+	"csv-parser/internal/service"
 )
 
 func Process(cfg *config.Config) error {
@@ -15,33 +15,31 @@ func Process(cfg *config.Config) error {
 		return fmt.Errorf("ошибка чтения CSV: %w", err)
 	}
 
-	if len(cfg.Required) > 0 {
-		records, err = validator.Required(records, cfg.Required)
-		if err != nil {
-			return fmt.Errorf("валидация required: %w", err)
-		}
+	records, err = service.RequiredService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("валидация required: %w", err)
 	}
 
-	if len(cfg.Range) > 0 {
-		records, err = validator.RangeValidator(records, cfg.Range, cfg.Verbose)
-		if err != nil {
-			return fmt.Errorf("валидация range: %w", err)
-		}
+	records, err = service.RangeValidatorService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("валидация range: %w", err)
 	}
 
-	
-	if len(cfg.ValidateType) > 0 {
-		records, err = validator.ValidateTypes(records, cfg.ValidateType, cfg.Verbose)
-		if err != nil {
-			return fmt.Errorf("валидация типов: %w", err)
-		}
+
+	records, err = service.ValidateTypeService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("валидация типов: %w", err)
 	}
 
-	if len(cfg.Filter) > 0 {
-		records, err = validator.Filter(records, cfg.Filter, cfg.Verbose)
-		if err != nil {
-			return fmt.Errorf("фильтрация: %w", err)
-		}
+
+	records, err = service.FilterService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("фильтрация: %w", err)
+	}
+
+	records, err = service.SortService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("сортировка: %w", err)
 	}
 
 

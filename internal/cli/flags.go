@@ -15,6 +15,7 @@ func ParseFlags() *config.Config {
 		rangeRaw     string
 		verbose      bool
 		filterRow    string
+		sortRaw      string
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -23,6 +24,7 @@ func ParseFlags() *config.Config {
 	flag.StringVar(&rangeRaw, "range", "", "Диапазоны значений (пример: Age:18-65)")
 	flag.BoolVar(&verbose, "verbose", false, "Вывод подробной информации")
 	flag.StringVar(&filterRow, "filter", "", "Фильтрация по строке (пример: Age>100)")
+	flag.StringVar(&sortRaw, "sort", "", "Сортировка по колонке (пример: Age:desc или Name:asc)")
 
 
 	flag.Parse()
@@ -34,5 +36,6 @@ func ParseFlags() *config.Config {
 		Range:        pkg.ParseRangeMap(rangeRaw),
 		Verbose:      verbose,
 		Filter:    	  filterRow,
+		Sort:         sortRaw,
 	}
 }

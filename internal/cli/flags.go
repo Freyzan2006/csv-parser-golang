@@ -16,6 +16,7 @@ func ParseFlags() *config.Config {
 		verbose      bool
 		filterRow    string
 		sortRaw      string
+		header       bool
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -25,6 +26,7 @@ func ParseFlags() *config.Config {
 	flag.BoolVar(&verbose, "verbose", false, "Вывод подробной информации")
 	flag.StringVar(&filterRow, "filter", "", "Фильтрация по строке (пример: Age>100)")
 	flag.StringVar(&sortRaw, "sort", "", "Сортировка по колонке (пример: Age:desc или Name:asc)")
+	flag.BoolVar(&header, "header", true, "Учитывать ли заголовки в первой строке")
 
 
 	flag.Parse()
@@ -37,5 +39,6 @@ func ParseFlags() *config.Config {
 		Verbose:      verbose,
 		Filter:    	  filterRow,
 		Sort:         sortRaw,
+		Header:       header,
 	}
 }

@@ -8,4 +8,5 @@ type Config struct {
 	Verbose 	 bool
 	Filter		 string
 	Sort		 string
+	Header 		 bool
 }

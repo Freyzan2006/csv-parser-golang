@@ -9,4 +9,5 @@ type Config struct {
 	Filter		 string
 	Sort		 string
 	Header 		 bool
+	Export       string
 }

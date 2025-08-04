@@ -42,6 +42,11 @@ func Process(cfg *config.Config) error {
 	if err != nil {
 		return fmt.Errorf("сортировка: %w", err)
 	}
+
+	records, err = service.ExportService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("экспорт: %w", err)
+	}
 	
 
 	printer.PrintRecords(records)

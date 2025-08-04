@@ -17,6 +17,7 @@ func ParseFlags() *config.Config {
 		filterRow    string
 		sortRaw      string
 		header       bool
+		outFormat    string
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -27,6 +28,8 @@ func ParseFlags() *config.Config {
 	flag.StringVar(&filterRow, "filter", "", "Фильтрация по строке (пример: Age>100)")
 	flag.StringVar(&sortRaw, "sort", "", "Сортировка по колонке (пример: Age:desc или Name:asc)")
 	flag.BoolVar(&header, "header", true, "Учитывать ли заголовки в первой строке")
+	flag.StringVar(&outFormat, "out-format", "csv", "Формат вывода: csv, json, excel")
+
 
 
 	flag.Parse()
@@ -40,5 +43,6 @@ func ParseFlags() *config.Config {
 		Filter:    	  filterRow,
 		Sort:         sortRaw,
 		Header:       header,
+		Export:    	  outFormat,
 	}
 }

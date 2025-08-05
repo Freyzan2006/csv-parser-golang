@@ -86,3 +86,35 @@ func ParseFilter(input string) (FilterCondition, error) {
 		Value:    val,
 	}, nil
 }
+
+
+
+
+
+
+type AggregateOp struct {
+	Column string
+	Op     string // sum, avg, max, min
+}
+
+func ParseAggregates(arg string) ([]AggregateOp, error) {
+	if arg == "" {
+		return nil, nil
+	}
+
+	var result []AggregateOp
+	parts := strings.Split(arg, ",")
+	for _, part := range parts {
+		kv := strings.Split(part, ":")
+		if len(kv) != 2 {
+			return nil, fmt.Errorf("неверный формат агрегата: %s", part)
+		}
+		col := kv[0]
+		op := kv[1]
+		if op != "sum" && op != "avg" && op != "min" && op != "max" {
+			return nil, fmt.Errorf("неподдерживаемая операция агрегата: %s", op)
+		}
+		result = append(result, AggregateOp{Column: col, Op: op})
+	}
+	return result, nil
+}

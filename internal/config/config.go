@@ -1,5 +1,9 @@
 package config
 
+import (
+	"csv-parser/pkg"
+)
+
 type Config struct {
 	FilePath     string
 	Required     []string
@@ -10,4 +14,5 @@ type Config struct {
 	Sort		 string
 	Header 		 bool
 	Export       string
+	Aggregate    []pkg.AggregateOp
 }

@@ -7,6 +7,13 @@ import (
 	"csv-parser/internal/config"
 )
 
+import (
+	"log"
+)
+
+
+
+
 func ParseFlags() *config.Config {
 	var (
 		filePath     string
@@ -18,6 +25,7 @@ func ParseFlags() *config.Config {
 		sortRaw      string
 		header       bool
 		outFormat    string
+		aggregate    string
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -29,10 +37,17 @@ func ParseFlags() *config.Config {
 	flag.StringVar(&sortRaw, "sort", "", "Сортировка по колонке (пример: Age:desc или Name:asc)")
 	flag.BoolVar(&header, "header", true, "Учитывать ли заголовки в первой строке")
 	flag.StringVar(&outFormat, "out-format", "csv", "Формат вывода: csv, json, excel")
-
-
+	flag.StringVar(&aggregate, "aggregate", "", "Агрегации вида col:op, например Age:sum или Price:avg")
 
 	flag.Parse()
+
+	aggOps, err := pkg.ParseAggregates(aggregate)
+	if err != nil {
+		log.Fatalf("ошибка парсинга агрегатов: %v", err)
+	}
+
+
+	
 
 	return &config.Config{
 		FilePath:     filePath,
@@ -44,5 +59,6 @@ func ParseFlags() *config.Config {
 		Sort:         sortRaw,
 		Header:       header,
 		Export:    	  outFormat,
+		Aggregate:    aggOps,
 	}
 }

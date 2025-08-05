@@ -43,6 +43,15 @@ func Process(cfg *config.Config) error {
 		return fmt.Errorf("сортировка: %w", err)
 	}
 
+	fmt.Println("Aggregate config:", cfg.Aggregate)
+
+
+	records, err = service.AggregateService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("агрегация: %w", err)
+	}
+
+
 	records, err = service.ExportService(cfg, records)
 	if err != nil {
 		return fmt.Errorf("экспорт: %w", err)

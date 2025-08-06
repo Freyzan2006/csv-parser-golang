@@ -15,4 +15,5 @@ type Config struct {
 	Header 		 bool
 	Export       string
 	Aggregate    []pkg.AggregateOp
+	Search 		 string
 }

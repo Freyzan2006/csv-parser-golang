@@ -24,7 +24,11 @@ func ExportService(flags *config.Config, records []model.Record) ([]model.Record
 		if err := exporter.Export(records, flags.Export, outputFile); err != nil {
 			return nil, fmt.Errorf("ошибка экспорта: %w", err)
 		}
-		fmt.Println("Результаты экспортированы в:", outputFile)
+		if flags.Verbose && len(records) > 0 {
+			fmt.Printf("Результаты экспортированы в: %s\n", outputFile)
+		}
+		
+		
 	}
 	return records, nil
 }

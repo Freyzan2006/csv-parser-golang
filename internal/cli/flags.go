@@ -26,6 +26,7 @@ func ParseFlags() *config.Config {
 		header       bool
 		outFormat    string
 		aggregate    string
+		search 		 string 
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -38,6 +39,7 @@ func ParseFlags() *config.Config {
 	flag.BoolVar(&header, "header", true, "Учитывать ли заголовки в первой строке")
 	flag.StringVar(&outFormat, "out-format", "csv", "Формат вывода: csv, json, excel")
 	flag.StringVar(&aggregate, "aggregate", "", "Агрегации вида col:op, например Age:sum или Price:avg")
+	flag.StringVar(&search, "search", "", "Поиск строк по значению, пример: name=John")
 
 	flag.Parse()
 
@@ -60,5 +62,6 @@ func ParseFlags() *config.Config {
 		Header:       header,
 		Export:    	  outFormat,
 		Aggregate:    aggOps,
+		Search:       search,
 	}
 }

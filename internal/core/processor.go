@@ -43,7 +43,11 @@ func Process(cfg *config.Config) error {
 		return fmt.Errorf("сортировка: %w", err)
 	}
 
-	fmt.Println("Aggregate config:", cfg.Aggregate)
+
+	records, err = service.SearchService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("поиск: %w", err)
+	}
 
 
 	records, err = service.AggregateService(cfg, records)

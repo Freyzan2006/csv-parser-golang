@@ -61,6 +61,9 @@ func Process(cfg *config.Config) error {
 		return fmt.Errorf("экспорт: %w", err)
 	}
 	
+	
+	records = service.PaginationService(cfg, records)
+	
 
 	printer.PrintRecords(records)
 	return nil

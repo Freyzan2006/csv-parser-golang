@@ -26,7 +26,9 @@ func ParseFlags() *config.Config {
 		header       bool
 		outFormat    string
 		aggregate    string
-		search 		 string 
+		search 		 string
+		page         int
+		perPage      int 
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -40,6 +42,8 @@ func ParseFlags() *config.Config {
 	flag.StringVar(&outFormat, "out-format", "csv", "Формат вывода: csv, json, excel")
 	flag.StringVar(&aggregate, "aggregate", "", "Агрегации вида col:op, например Age:sum или Price:avg")
 	flag.StringVar(&search, "search", "", "Поиск строк по значению, пример: name=John")
+	flag.IntVar(&page, "page", 1, "Номер страницы для постраничного вывода (начиная с 1)")
+	flag.IntVar(&perPage, "per-page", 10, "Количество записей на странице")
 
 	flag.Parse()
 
@@ -63,5 +67,7 @@ func ParseFlags() *config.Config {
 		Export:    	  outFormat,
 		Aggregate:    aggOps,
 		Search:       search,
+		Page:     	  page,
+		PerPage:  	  perPage,
 	}
 }

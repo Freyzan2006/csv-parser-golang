@@ -16,4 +16,6 @@ type Config struct {
 	Export       string
 	Aggregate    []pkg.AggregateOp
 	Search 		 string
+	Page         int
+	PerPage      int
 }

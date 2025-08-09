@@ -15,5 +15,8 @@ set -e
 
 # go run cmd/main.go -file test.csv -header=true -search="Name=Alice"  -verbose
 
-go run cmd/main.go -file test.csv -page 4 -per-page 3
+# go run cmd/main.go -file test.csv -page 4 -per-page 3
+
+go run cmd/main.go -file input.csv -header=true -range "Age:18-20" -compare output.csv
+
 

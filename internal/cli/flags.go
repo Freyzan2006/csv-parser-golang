@@ -29,6 +29,7 @@ func ParseFlags() *config.Config {
 		search 		 string
 		page         int
 		perPage      int 
+		compareFile  string
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -44,6 +45,7 @@ func ParseFlags() *config.Config {
 	flag.StringVar(&search, "search", "", "Поиск строк по значению, пример: name=John")
 	flag.IntVar(&page, "page", 1, "Номер страницы для постраничного вывода (начиная с 1)")
 	flag.IntVar(&perPage, "per-page", 10, "Количество записей на странице")
+	flag.StringVar(&compareFile, "compare", "", "Сравнить с другим CSV файлом")
 
 	flag.Parse()
 
@@ -69,5 +71,6 @@ func ParseFlags() *config.Config {
 		Search:       search,
 		Page:     	  page,
 		PerPage:  	  perPage,
+		CompareFile: compareFile,
 	}
 }

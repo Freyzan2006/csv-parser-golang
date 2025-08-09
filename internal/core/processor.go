@@ -14,6 +14,11 @@ func Process(cfg *config.Config) error {
 		return fmt.Errorf("ошибка чтения CSV: %w", err)
 	}
 
+	records, err = service.CompareService(cfg, records)
+	if err != nil {
+		return fmt.Errorf("сравнение: %w", err)
+	}
+
 	records, err = service.RequiredService(cfg, records)
 	if err != nil {
 		return fmt.Errorf("валидация required: %w", err)

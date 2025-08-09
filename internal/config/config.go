@@ -18,4 +18,5 @@ type Config struct {
 	Search 		 string
 	Page         int
 	PerPage      int
+	CompareFile  string
 }

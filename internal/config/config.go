@@ -19,4 +19,5 @@ type Config struct {
 	Page         int
 	PerPage      int
 	CompareFile  string
+	Encoding     string
 }

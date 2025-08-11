@@ -30,6 +30,7 @@ func ParseFlags() *config.Config {
 		page         int
 		perPage      int 
 		compareFile  string
+		encoding     string
 	)
 
 	flag.StringVar(&filePath, "file", "", "Путь к CSV-файлу")
@@ -46,6 +47,7 @@ func ParseFlags() *config.Config {
 	flag.IntVar(&page, "page", 1, "Номер страницы для постраничного вывода (начиная с 1)")
 	flag.IntVar(&perPage, "per-page", 10, "Количество записей на странице")
 	flag.StringVar(&compareFile, "compare", "", "Сравнить с другим CSV файлом")
+	flag.StringVar(&encoding, "encoding", "utf-8", "Кодировка CSV-файла(utf-8, windows-1251, cp1251, iso-8859-1)")
 
 	flag.Parse()
 
@@ -71,6 +73,7 @@ func ParseFlags() *config.Config {
 		Search:       search,
 		Page:     	  page,
 		PerPage:  	  perPage,
-		CompareFile: compareFile,
+		CompareFile:  compareFile,
+		Encoding:     encoding,
 	}
 }

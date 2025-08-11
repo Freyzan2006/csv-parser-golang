@@ -17,18 +17,18 @@ func CompareService(cfg *config.Config, records []model.Record) ([]model.Record,
 		return records, nil
 	}
 
-	otherRecords, err := parser.ReadCSV(cfg.CompareFile, cfg.Header)
+	otherRecords, err := parser.ReadCSV(cfg.CompareFile, cfg.Header, cfg.Encoding)
 	if err != nil {
 		return nil, fmt.Errorf("ошибка чтения второго CSV: %w", err)
 	}
 
-	// Преобразуем запись в строку-ключ
+
 	toKey := func(r model.Record) string {
 		keys := make([]string, 0, len(r))
 		for k := range r {
 			keys = append(keys, k)
 		}
-		sort.Strings(keys) // фиксируем порядок
+		sort.Strings(keys) 
 		var sb strings.Builder
 		for _, k := range keys {
 			sb.WriteString(fmt.Sprintf("%s=%s;", k, r[k]))
@@ -48,14 +48,14 @@ func CompareService(cfg *config.Config, records []model.Record) ([]model.Record,
 
 	fmt.Println("=== Различия между файлами ===")
 
-	// Записи, которые есть в первом, но нет во втором
+
 	for _, r := range records {
 		if !secondSet[toKey(r)] {
 			fmt.Println("- Удалена:", r)
 		}
 	}
 
-	// Записи, которые есть во втором, но нет в первом
+
 	for _, r := range otherRecords {
 		if !firstSet[toKey(r)] {
 			fmt.Println("+ Добавлена:", r)

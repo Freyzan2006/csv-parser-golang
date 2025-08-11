@@ -9,7 +9,7 @@ import (
 )
 
 func Process(cfg *config.Config) error {
-	records, err := parser.ReadCSV(cfg.FilePath, cfg.Header)
+	records, err := parser.ReadCSV(cfg.FilePath, cfg.Header, cfg.Encoding)
 	if err != nil {
 		return fmt.Errorf("ошибка чтения CSV: %w", err)
 	}

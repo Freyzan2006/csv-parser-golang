@@ -17,6 +17,6 @@ set -e
 
 # go run cmd/main.go -file test.csv -page 4 -per-page 3
 
-go run cmd/main.go -file input.csv -header=true -range "Age:18-20" -compare output.csv
+# go run cmd/main.go -file input.csv -header=true -range "Age:18-20" -compare output.csv
 
-
+go run cmd/main.go -file input.csv -encoding utf-8

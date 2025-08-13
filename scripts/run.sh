@@ -9,13 +9,13 @@ set -e
 #    -out-format "json" -sort "Age:asc" -aggregate "col_3:sum,col_3:avg,col_4:max" -verbose 
 
 
-# go run cmd/main.go -file ./test.csv \
+# go run cmd/main.go -file input.csv \
 #   -header=true \
 #   -aggregate=Age:sum,Price:avg 
 
-# go run cmd/main.go -file test.csv -header=true -search="Name=Alice"  -verbose
+# go run cmd/main.go -file input.csv -header=true -search="Name=Alice"  -verbose
 
-# go run cmd/main.go -file test.csv -page 4 -per-page 3
+# go run cmd/main.go -file input.csv -page 4 -per-page 3
 
 # go run cmd/main.go -file input.csv -header=true -range "Age:18-20" -compare output.csv
 

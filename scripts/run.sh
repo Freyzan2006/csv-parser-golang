@@ -19,4 +19,7 @@ set -e
 
 # go run cmd/main.go -file input.csv -header=true -range "Age:18-20" -compare output.csv
 
-go run cmd/main.go -file input.csv -encoding utf-8
+# go run cmd/main.go -file input.csv -encoding utf-8
+
+go run cmd/main.go -file=input.csv -log=output.log
+

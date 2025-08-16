@@ -20,4 +20,5 @@ type Config struct {
 	PerPage      int
 	CompareFile  string
 	Encoding     string
+	LogFile		 string 
 }

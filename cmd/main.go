@@ -39,13 +39,20 @@ package main
 import (
 	"csv-parser/internal/cli"
 	"csv-parser/internal/core"
+	"csv-parser/internal/logger"
 	"log"
 )
 
 func main() {
 	cfg := cli.ParseFlags()
 
+	logger.Init(cfg.LogFile)
+
+	logger.Logger.Println("Старт программы")
+
 	if err := core.Process(cfg); err != nil {
 		log.Fatal(err)
 	}
+
+	logger.Logger.Println("Старт Завершено")
 }
